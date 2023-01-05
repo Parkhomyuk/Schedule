@@ -1,0 +1,29 @@
+<div class="grid-wrapper">
+    <div class="columns-header">
+        <app-grid-header></app-grid-header>
+    </div>
+    
+    <div class="section-row">
+        <div class="row-parent" *ngFor="let row of rowsGrid; let i=index">
+            <ng-container *ngIf="i==0"> 
+                <div class="row-time">
+                    <div class="row-time-value">.</div>    
+                </div>
+                <div class="row"></div>
+            </ng-container>
+            <ng-container *ngIf="i>0">
+                <div class="row-time">
+                    <div class="row-time-value">{{row}}</div>    
+                </div>
+                <div class="row"></div>
+            </ng-container>
+          
+        </div>
+        <div class="columns">
+           
+            <app-grid-columns [weekColumns]="columnGrid"></app-grid-columns>
+        </div>
+    </div>
+    
+    
+</div>

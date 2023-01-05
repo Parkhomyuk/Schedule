@@ -1,0 +1,14 @@
+.wrapper{
+    width: 99%;
+    height: 83vh;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    padding-left: 2%;
+    .cell{
+        width: 24%;
+        height: 33%;
+        border-right: 0.5px solid lightgray;
+        border-bottom: 0.5px solid lightgray;
+    }
+}

@@ -1,0 +1,46 @@
+<div class="nuv-wrapper">
+    <div class="nuv">       
+        <div class="nuv-left">
+            <div class="side-pane-button"><button  mat-icon-button  >	<mat-icon>reorder</mat-icon></button></div>
+            <div class="nuv-left-image">
+                   <img [src]=currentDateIcon alt="current day">               
+            </div>
+            <div class="nuv-left-title">Calendar</div>
+            <button mat-stroked-button  >Today</button>
+            <div class="period-navigation">
+                <div class="navigation-left"> 
+                    <button  mat-icon-button  (click)="moveToPeriod(-1)">	
+                        <mat-icon aria-hidden="false" aria-label="home" [inline]="true">keyboard_arrow_left</mat-icon>
+                    </button>    
+                    </div>
+                <div class="navigation-right">
+                    <button  mat-icon-button  (click)="moveToPeriod(1)">	
+                        <mat-icon aria-hidden="false" aria-label="home" [inline]="true">keyboard_arrow_right</mat-icon>
+                    </button>
+                    </div>
+                        
+                <div class="navigation-title">                
+                    {{selectedDate}}                    
+                </div>
+            </div>
+        </div>
+        <div class="nuv-right">
+            <div class="nuv-options">
+                <button mat-stroked-button  [matMenuTriggerFor]="menu">
+                    <ng-container *ngIf="period$ | async as periodSelected">
+                        {{periodSelected}}
+                    </ng-container>                   
+                  
+                </button>
+                <mat-menu #menu="matMenu">
+                <button mat-menu-item [routerLink]="['week']"  >Week</button>
+                <button mat-menu-item [routerLink]="['day']"  >Day</button>            
+                <button mat-menu-item [routerLink]="['month']"  >Month</button>
+                <button mat-menu-item [routerLink]="['year']" >Year</button>
+                </mat-menu>
+            </div>
+        </div>
+      
+    </div>
+   
+</div>

@@ -1,0 +1,15 @@
+<div class="week-wrapper">
+    <div class="week-grid">
+        <div class="column-left"><span> GMT{{timeZone}}</span></div>
+        <!-- <div class="column-left"> </div> -->
+         
+            <div class="column" *ngFor="let day of weekDays; let i=index">
+                <div class="top-part">
+                    <div class="week-days">{{day.format('dd')}}</div>
+                    <div class="week-date">{{day.format('D')}}</div>
+                </div>
+                <div class="bottom-part"></div>
+            </div>
+        
+    </div>   
+</div>

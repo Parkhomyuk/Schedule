@@ -1,0 +1,45 @@
+<div class="grid-wrapper">
+    <div class="columns-header">
+        <div class="day-wrapper">
+            <div class="day-grid">
+                <div class="column-left"><span> GMT{{timeZone}}</span></div>
+                <!-- <div class="column-left"> </div> -->
+                 
+                    <div class="column">
+                        <div class="top-part">
+                            <div class="day-days">{{day.format('dd')}}</div>
+                            <div class="day-date">{{day.format('D')}}</div>
+                        </div>
+                        <div class="bottom-part"></div>
+                    </div>
+                
+            </div>   
+        </div>
+    </div>
+    
+    <div class="section-row">
+        <div class="row-parent" *ngFor="let row of rowsGrid; let i=index">
+            <ng-container *ngIf="i==0"> 
+                <div class="row-time">
+                    <div class="row-time-value">.</div>    
+                </div>
+                <div class="row"></div>
+            </ng-container>
+            <ng-container *ngIf="i>0">
+                <div class="row-time">
+                    <div class="row-time-value">{{row}}</div>    
+                </div>
+                <div class="row"></div>
+            </ng-container>
+          
+        </div>
+        <div class="columns">
+            <div class="current-time" timeDetector>
+                <div class="current-time-pin"></div>    
+            </div> 
+            <!-- <app-grid-columns [weekColumns]="columnGrid"></app-grid-columns> -->
+        </div>
+    </div>
+    
+    
+</div>

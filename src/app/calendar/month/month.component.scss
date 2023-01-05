@@ -1,0 +1,38 @@
+.wrapper{
+    width: 101%;
+    height: 84vh;
+    display:flex;
+    flex-direction: column;
+    flex-wrap: nowrap;     
+    border-top: 0.5px solid lightgrey; 
+    position: relative; 
+    margin-left: 0%;
+    .week-days-header{
+        position: absolute;
+        width: 100%;
+        height: 3vh;
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-start;
+        .day{
+            height: 100%;
+            width:calc(100%/5);
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            border-right: 0.5px solid lightgrey;
+        } 
+    }
+    .rows{
+        width: 100%;
+        display:flex;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        height: calc(100%/5);
+        border-bottom: 0.5px solid lightgrey; 
+        .cell{
+            width: calc(100%/7);
+            border-right: 0.5px solid lightgrey; 
+        }
+    }
+}

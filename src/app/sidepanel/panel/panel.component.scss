@@ -1,0 +1,34 @@
+.side-pane-wrapper{
+    height: 95vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: nowrap;
+    margin-top: 5vh; 
+    .side-panel-top,  .side-panel-center, .side-panel-footer{
+        
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: nowrap;
+    }
+
+    .side-panel-top{
+        height: 10%;
+        width: 100%;
+        background-color: antiquewhite;
+    } 
+     .side-panel-center{
+        height: 40%;
+        width: 100%;
+        background-color: rgb(161, 226, 204);
+    } 
+    .side-panel-footer{
+        height: 50%;
+        width: 100%;
+        background-color: rgb(236, 204, 162);
+    } 
+}

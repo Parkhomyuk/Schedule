@@ -1,0 +1,65 @@
+.nuv-wrapper{
+    width: 100vw;
+    height: 5vh;
+    position: fixed;
+    background-color: white;
+    top:0;
+    z-index: 12;
+    border-bottom: 0.5px solid lightgray;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    .nuv{
+        width: 95%;
+        
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        margin-left: 2.5%;
+        .nuv-left, .nuv-right{
+            
+            height: 100%;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+
+        }
+        .nuv-left{
+            width: 50%;
+            height: 100%;
+            justify-content: flex-start;
+            
+            .nuv-left-image{
+                width: auto;
+                height: 100%;
+                margin: 0 1rem;
+                img{
+                    width: auto;
+                    height: 2.5rem;
+                }
+            }
+            .nuv-left-title{
+                margin: 0 1rem;
+                font-size: 1.5rem;
+            }
+            .period-navigation{
+                display: flex;
+                flex-direction: row;
+                align-items: center;  
+                justify-content: center;  
+                div{
+                    cursor: pointer;
+                    font-size: 1.5rem;
+                }
+            }
+        }
+        .nuv-right{
+            width: 50%;
+            justify-content: flex-end;
+        }
+    }
+   
+     
+}

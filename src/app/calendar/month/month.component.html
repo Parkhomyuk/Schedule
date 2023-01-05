@@ -1,0 +1,8 @@
+<div class="wrapper">
+    <div class="week-days-header">
+        <div class="day" *ngFor="let day of headerWeekDays">{{day.dayName}}</div>
+    </div>
+    <div class="rows" *ngFor="let row of grid; let i=index">        
+        <div class="cell" *ngFor="let cell of row.week">{{cell.dayOfMonth}}</div>
+    </div>
+</div>
