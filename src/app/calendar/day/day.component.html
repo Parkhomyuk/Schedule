@@ -7,6 +7,10 @@
                  
                     <div class="column">
                         <div class="top-part">
+                            <!-- <div class="day-days">{{day.format('dd')}}</div>
+                            <div class="day-date">{{day.format('D')}}</div> -->
+                           
+                            
                             <div class="day-days">{{day.format('dd')}}</div>
                             <div class="day-date">{{day.format('D')}}</div>
                         </div>
@@ -34,9 +38,12 @@
           
         </div>
         <div class="columns">
-            <div class="current-time" timeDetector>
-                <div class="current-time-pin"></div>    
-            </div> 
+            <ng-container *ngIf="day.format('DD')===dayToDay.format('DD')"> 
+                <div class="current-time" timeDetector>
+                    <div class="current-time-pin"></div>    
+                </div> 
+            </ng-container>
+           
             <!-- <app-grid-columns [weekColumns]="columnGrid"></app-grid-columns> -->
         </div>
     </div>

@@ -6,7 +6,7 @@
                    <img [src]=currentDateIcon alt="current day">               
             </div>
             <div class="nuv-left-title">Calendar</div>
-            <button mat-stroked-button  >Today</button>
+            <button mat-stroked-button  (click)="onDayToday()">Today</button>
             <div class="period-navigation">
                 <div class="navigation-left"> 
                     <button  mat-icon-button  (click)="moveToPeriod(-1)">	

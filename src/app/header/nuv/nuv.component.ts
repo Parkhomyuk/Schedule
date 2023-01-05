@@ -89,13 +89,13 @@ export class NuvComponent extends UnsubComponent  implements OnInit, OnDestroy {
       current=this.convertPeriod(this.selectedStateDate).add(direction,'week');       
     }
     if(this.period==='Day'){
-      current=this.convertPeriod(this.selectedStateDate).add(1,'day');  
+      current=this.convertPeriod(this.selectedStateDate).add(direction,'days');  
     }
     if(this.period==='Month'){
-      current=this.convertPeriod(this.selectedStateDate).add(1,'month');  
+      current=this.convertPeriod(this.selectedStateDate).add(direction,'month');  
     }
     if(this.period==='Year'){
-      current=this.convertPeriod(this.selectedStateDate).add(1,'year');  
+      current=this.convertPeriod(this.selectedStateDate).add(direction,'year');  
     }
     const newSelectedDate:DaysOfMonth={
       dayOfWeek: current.day(),
@@ -109,11 +109,16 @@ export class NuvComponent extends UnsubComponent  implements OnInit, OnDestroy {
   }
   private displayCurrentPeriodTitle(period: DaysOfMonth): string{
     let selectedPeriod=this.convertPeriod(period);     
-    let startWeekMonth=selectedPeriod.clone().startOf('week');
-    let endWeekMonth=selectedPeriod.clone().endOf('week');
-    if(startWeekMonth.month()!=endWeekMonth.month()){
-      return `${startWeekMonth.format('MMMM').slice(0,3)} - ${endWeekMonth.format('MMMM').slice(0,3)}  ${period.currentYear}`
-    } else{
+    if(this.period==='Week'){    
+      let startWeekMonth=selectedPeriod.clone().startOf('week');
+      let endWeekMonth=selectedPeriod.clone().endOf('week');
+      if(startWeekMonth.month()!=endWeekMonth.month()){
+        return `${startWeekMonth.format('MMMM').slice(0,3)} - ${endWeekMonth.format('MMMM').slice(0,3)}  ${period.currentYear}`
+      } else{
+        return `${moment().set('month',period.currentMonth).format('MMMM')} ${period.currentYear}`
+      }
+    }
+    else{
       return `${moment().set('month',period.currentMonth).format('MMMM')} ${period.currentYear}`
     }
    
@@ -121,6 +126,17 @@ export class NuvComponent extends UnsubComponent  implements OnInit, OnDestroy {
   private convertPeriod(period: DaysOfMonth){
     console.log('move to period2', moment(`${period.dayOfMonth}-${period.currentMonth+1}-${period.currentYear}`, 'DD-MM-YYYY').format('DD-MM-YYYY'));
     return moment(`${period.dayOfMonth}-${period.currentMonth+1}-${period.currentYear}`, 'DD-MM-YYYY')
+  }
+
+  public onDayToday(): void{
+    const newSelectedDate:DaysOfMonth={
+      dayOfWeek: moment().day(),
+      dayOfMonth: moment().date(),
+      weekOfYear: moment().week(),
+      currentYear: moment().year(),
+      currentMonth: moment().month()
+    }    
+    this.store.dispatch(selectedDateAction({ selectedDate: newSelectedDate})) 
   }
 
 }
