@@ -9,6 +9,7 @@ import { UtilsModule } from 'src/app/utils/utils.module';
 import {MatMenuModule} from '@angular/material/menu';
 import { TimeDetectorDirective } from '../directives/time-detector.directive';
 import { TimePinComponent } from '../utils/time-pin/time-pin.component';
+import { NewEventComponent } from './components/new-event/new-event.component';
  
  
  
@@ -21,7 +22,8 @@ import { TimePinComponent } from '../utils/time-pin/time-pin.component';
     GridHeaderComponent,
     GridRowsComponent,
     TimeDetectorDirective,
-    TimePinComponent 
+    TimePinComponent,
+    NewEventComponent 
   ],
   imports: [
     CommonModule,

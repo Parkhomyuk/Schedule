@@ -11,6 +11,7 @@ import { IUIState } from 'src/app/store/models/uiState.interface';
 import { currentPeriod } from 'src/app/store/selectors/ui.selector';
 import { currentViewPeriodAction } from 'src/app/store/actions/uiState.actions';
 import { selectedDateAction } from 'src/app/store/actions/date.actions';
+import { CommonFunctionsService } from 'src/app/utils/services/common-functions.service';
 
 @Component({
   selector: 'app-nuv',
@@ -27,7 +28,7 @@ export class NuvComponent extends UnsubComponent  implements OnInit, OnDestroy {
   private selectedDateTitle$!:Observable<DaysOfMonth>;
   public selectedDate: string='';
   public selectedStateDate!:DaysOfMonth; 
-  constructor( private route: ActivatedRoute, private store: Store<ICurrentDateSate>, private store_ui: Store<IUIState>, private router: Router) { 
+  constructor( private route: ActivatedRoute, private store: Store<ICurrentDateSate>, private store_ui: Store<IUIState>, private router: Router, private commonFunctionsService: CommonFunctionsService) { 
     super();
     this.selectedDateTitle$=this.store.pipe(select(selectSelectedDate)); 
     this.period$=this.store_ui.pipe(select(currentPeriod));    
@@ -86,16 +87,16 @@ export class NuvComponent extends UnsubComponent  implements OnInit, OnDestroy {
     console.log('move to period', this.period);
     let current=moment();
     if(this.period==='Week'){             
-      current=this.convertPeriod(this.selectedStateDate).add(direction,'week');       
+      current=this.commonFunctionsService.convertPeriodToMoment(this.selectedStateDate).add(direction,'week');       
     }
     if(this.period==='Day'){
-      current=this.convertPeriod(this.selectedStateDate).add(direction,'days');  
+      current=this.commonFunctionsService.convertPeriodToMoment(this.selectedStateDate).add(direction,'days');  
     }
     if(this.period==='Month'){
-      current=this.convertPeriod(this.selectedStateDate).add(direction,'month');  
+      current=this.commonFunctionsService.convertPeriodToMoment(this.selectedStateDate).add(direction,'month');  
     }
     if(this.period==='Year'){
-      current=this.convertPeriod(this.selectedStateDate).add(direction,'year');  
+      current=this.commonFunctionsService.convertPeriodToMoment(this.selectedStateDate).add(direction,'year');  
     }
     const newSelectedDate:DaysOfMonth={
       dayOfWeek: current.day(),
@@ -108,7 +109,7 @@ export class NuvComponent extends UnsubComponent  implements OnInit, OnDestroy {
     this.store.dispatch(selectedDateAction({ selectedDate: newSelectedDate})) 
   }
   private displayCurrentPeriodTitle(period: DaysOfMonth): string{
-    let selectedPeriod=this.convertPeriod(period);     
+    let selectedPeriod=this.commonFunctionsService.convertPeriodToMoment(period);     
     if(this.period==='Week'){    
       let startWeekMonth=selectedPeriod.clone().startOf('week');
       let endWeekMonth=selectedPeriod.clone().endOf('week');
@@ -123,11 +124,7 @@ export class NuvComponent extends UnsubComponent  implements OnInit, OnDestroy {
     }
    
   }
-  private convertPeriod(period: DaysOfMonth){
-    console.log('move to period2', moment(`${period.dayOfMonth}-${period.currentMonth+1}-${period.currentYear}`, 'DD-MM-YYYY').format('DD-MM-YYYY'));
-    return moment(`${period.dayOfMonth}-${period.currentMonth+1}-${period.currentYear}`, 'DD-MM-YYYY')
-  }
-
+ 
   public onDayToday(): void{
     const newSelectedDate:DaysOfMonth={
       dayOfWeek: moment().day(),

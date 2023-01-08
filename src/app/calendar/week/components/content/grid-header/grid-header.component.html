@@ -6,7 +6,7 @@
             <div class="column" *ngFor="let day of weekDays; let i=index">
                 <div class="top-part">
                     <div class="week-days">{{day.format('dd')}}</div>
-                    <div class="week-date">{{day.format('D')}}</div>
+                    <div class="week-date" [ngClass]="{'active-day': currentDay(day) }">{{day.format('D')}}</div>
                 </div>
                 <div class="bottom-part"></div>
             </div>

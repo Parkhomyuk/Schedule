@@ -1,4 +1,4 @@
-import { Component, ElementRef, Input, OnInit, Renderer2 } from '@angular/core';
+import { Component, ComponentFactoryResolver, ElementRef, HostListener, Input, OnInit, QueryList, Renderer2, ViewChild, ViewChildren, ViewContainerRef } from '@angular/core';
 import { select, Store } from '@ngrx/store';
 import * as moment from 'moment';
 import { Observable } from 'rxjs';
@@ -7,6 +7,8 @@ import { DaysOfMonth } from 'src/app/sidepanel/panel/navigator/models/dayOfMonth
 import { ICurrentDateSate } from 'src/app/store/models/currentDateState.interface';
 import { selectSelectedDate } from 'src/app/store/selectors/date.selector';
 import { UnsubComponent } from 'src/app/utils/components/unsub/unsub.component';
+import { MarkerDirective } from 'src/app/utils/directives/marker.directive';
+import { NewEventComponent } from '../../new-event/new-event.component';
 
 @Component({
   selector: 'app-grid-columns',
@@ -15,11 +17,31 @@ import { UnsubComponent } from 'src/app/utils/components/unsub/unsub.component';
 })
 export class GridColumnsComponent extends UnsubComponent implements OnInit {
   @Input() public weekColumns!: moment.Moment[];
+  @ViewChildren('viewContainerRef', { read: ViewContainerRef })  VCR!: QueryList<ViewContainerRef>;
+  @ViewChildren(MarkerDirective, { read: ViewContainerRef }) appMarker!: QueryList<ViewContainerRef>;
+  @HostListener('mousedown',['$event'])
+  mousedown(event:any){
+    console.log('children', event.target)
+    let arr=this.appMarker?.toArray();
+    console.log('arr.length', this.appMarker.length)
+    let childComponentRef=null;
+    for(let i=0;i<this.appMarker.length;i++){
+      if(arr[i].element.nativeElement===event.target){
+        console.log('this.viewContainerRef?.toArray()[3]', this.appMarker.toArray())
+        let componentFactory=this.factory.resolveComponentFactory(NewEventComponent)
+        childComponentRef = this.VCR.toArray()[i].createComponent<singleData>(componentFactory);
+        childComponentRef.instance.data='green'
+      }
+     
+    }
+   console.log('childComponentRef', childComponentRef)
+    
+  }
   public eventForDisplay: Array<IEvent[]>=[];
   public eventList: IEvent[]=[{"startDate":'2022-12-24T14:00:00',"endDate":'2022-12-24T18:00:00',"title":"new event"},{"startDate":'2022-12-21T14:00:00',"endDate":'2022-12-21T18:00:00',"title":"new event"}, {"startDate":'2022-12-20 10:00:00',"endDate":'2022-12-20 15:00:00',"title":"new event"}]
   public dayToday: moment.Moment=moment();
   public currentPeriod$!: Observable<DaysOfMonth>;
-  constructor(private renderer: Renderer2, private el: ElementRef, private store_date: Store<ICurrentDateSate>) {
+  constructor(private renderer: Renderer2, private el: ElementRef, private store_date: Store<ICurrentDateSate>, public factory: ComponentFactoryResolver) {
     super();
     this.currentPeriod$=this.store_date.pipe(select(selectSelectedDate))
    }
@@ -29,7 +51,7 @@ export class GridColumnsComponent extends UnsubComponent implements OnInit {
     this.sortEventWeek();      
     this.renderer.setStyle(this.el.nativeElement.children[0].children[0], 'width',  this.el.nativeElement.parentElement.parentElement.parentElement.children[0].offsetWidth+'px');
     const sub1=this.currentPeriod$.subscribe(period=>{
-        this.dayToday=moment(`${period.dayOfMonth}-${period.currentMonth+1}-${period.currentYear}`, 'DD-MM-YYYY')
+        // this.dayToday=moment(`${period.dayOfMonth}-${period.currentMonth+1}-${period.currentYear}`, 'DD-MM-YYYY')
     })
     this.subscriber.push(sub1)
   }
@@ -51,6 +73,7 @@ export class GridColumnsComponent extends UnsubComponent implements OnInit {
   }
   onDetectDate(period: moment.Moment){
     let currentTime=moment();
+    
     if(currentTime.format('YYYY-MM-DD')===period.format('YYYY-MM-DD')){
       return true;
     }else{
@@ -64,4 +87,9 @@ export class GridColumnsComponent extends UnsubComponent implements OnInit {
     this.sortEventWeek();
   }
 
+}
+
+export interface singleData{
+  data: any
+  
 }

@@ -44,10 +44,25 @@
                 justify-content: flex-end;
                 align-items: center;
                 .week-days{
+                    width: 100%;
+                    height: 30%;
                     margin-bottom: 0.5rem;
+                    text-align: center;
                 }
                 .week-date{
+                    width: 2.5rem;
+                    height: 2.5rem;
                     font-size: 1.5rem;
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: center;
+                    align-items: center;
+                    
+                }
+                .active-day{
+                    background-color:  rgb(26,115,232);
+                    border-radius: 50%;
+                    color: white;
                 }
             }
             .bottom-part{

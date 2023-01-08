@@ -39,5 +39,13 @@ export class GridHeaderComponent extends UnsubComponent implements OnInit {
     })
     this.subscriber.push(sub1)
   }
+  currentDay(period: moment.Moment): boolean{
+    if(period.format('DD-MM-YYYY')===moment().format('DD-MM-YYYY')){
+      return true
+    }else{
+      return false
+    }
+    
+  }
 
 }

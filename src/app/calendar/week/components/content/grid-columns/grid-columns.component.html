@@ -1,7 +1,12 @@
 <div class="week-wrapper">
     <div class="week-grid">
         <div class="column-left" (click)="onAdd()"></div> 
-        <div class="column-center" *ngFor="let column of weekColumns; let i= index" appMarker [ngClass]="{'column-active' : onDetectDate(column)}">         
+        <div class="column-center" *ngFor="let column of weekColumns; let i= index" appMarker  [ngClass]="{'column-active' : onDetectDate(column)}" > 
+            <div class="wrapper-order">
+                <ng-template #viewContainerRef></ng-template>
+            </div>
+           
+                    
             <ng-container *ngIf="dayToday.format('DD-MM-YYYY')===column.format('DD-MM-YYYY')">
                 <ng-container *ngIf="onDetectDate(column)">
                     <div class="current-time" timeDetector>
