@@ -6,11 +6,11 @@ import { ContentComponent } from "./week/components/content/content.component";
 import { YearComponent } from "./year/year.component";
 
 export const routers: Routes=[
-    // {path:'', pathMatch:'full', redirectTo:'week'},
-    {path:'', component: ContentComponent},
+    {path:'', pathMatch:'full', redirectTo:'week'},
+    {path:'week', component: ContentComponent},
     {path:'day', component: DayComponent},
     {path:'month', component: MonthComponent},
-    {path:'year', component: YearComponent}
+    {path:'year', component: YearComponent},
 ]
 
 @NgModule({
