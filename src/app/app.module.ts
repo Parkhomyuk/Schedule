@@ -16,6 +16,7 @@ import { spinnerReducer } from './store/reducers/spinner.reducer';
 import { dateReducer } from './store/reducers/currentDate.reducer';
 import { environment } from '../environments/environment';
 import { uiReducer } from './store/reducers/uiState.reducer';
+import { ScheduleModule } from './schedule/schedule.module';
 
 @NgModule({
   declarations: [
@@ -27,6 +28,7 @@ import { uiReducer } from './store/reducers/uiState.reducer';
     CalendarModule,
     HeaderModule,
     SidepanelModule,
+    ScheduleModule,
     BrowserAnimationsModule,
     StoreModule.forRoot({spinnerReducer:spinnerReducer , dateReducer: dateReducer, uiReducer: uiReducer}),
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),

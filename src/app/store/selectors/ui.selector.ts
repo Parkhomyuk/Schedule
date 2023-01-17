@@ -3,6 +3,7 @@ import { IUIState } from "../models/uiState.interface";
 
 export const sidePanelStateSelector=createFeatureSelector<IUIState>('uiReducer');
 export const currentPeriodViewSelector=createFeatureSelector<IUIState>('uiReducer');
+export const currentModeViewSelector = createFeatureSelector<IUIState>('uiReducer')
 
 export const sidePanelSelector=createSelector(
     sidePanelStateSelector,
@@ -12,4 +13,10 @@ export const sidePanelSelector=createSelector(
 export const currentPeriod=createSelector(
     currentPeriodViewSelector,
     (state)=>state.currentViewPeriod
+)
+
+export const currentViewMode= createSelector(
+    currentModeViewSelector,
+    (state)=>state.currentViewMode
+
 )

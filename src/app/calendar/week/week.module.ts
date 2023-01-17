@@ -10,6 +10,9 @@ import {MatMenuModule} from '@angular/material/menu';
 import { TimeDetectorDirective } from '../directives/time-detector.directive';
 import { TimePinComponent } from '../utils/time-pin/time-pin.component';
 import { NewEventComponent } from './components/new-event/new-event.component';
+import { NewEventDetailsComponent } from './components/new-event/new-event-details/new-event-details.component';
+import { MatIconModule } from '@angular/material/icon';
+import { ResizeDirective } from './components/new-event/resize.directive';
  
  
  
@@ -23,13 +26,15 @@ import { NewEventComponent } from './components/new-event/new-event.component';
     GridRowsComponent,
     TimeDetectorDirective,
     TimePinComponent,
-    NewEventComponent 
+    NewEventComponent,
+    NewEventDetailsComponent,
+    ResizeDirective 
   ],
   imports: [
     CommonModule,
     UtilsModule,
     MatMenuModule,
-    
+    MatIconModule
   ],
   exports:[ContentComponent, GridHeaderComponent, TimeDetectorDirective,]
 })

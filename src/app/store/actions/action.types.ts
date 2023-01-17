@@ -10,4 +10,5 @@ export enum ActionTypes{
     OPEN_SIDEPANEL="[ALL] Sidepanel is opened",
     CLOSE_SIDEPANEL="[ALL] Sidepanel is closed",
     CURRENT_PERIOD_DISPLAY="[Calendar] Display Current period",
+    CURRENT_MODE_DISPLAY="[Calendar] Display Current view mode",
 }

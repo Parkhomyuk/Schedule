@@ -25,6 +25,21 @@
             </div>
         </div>
         <div class="nuv-right">
+        
+            <div class="nuv-options">
+                <button mat-stroked-button  [matMenuTriggerFor]="menuView">
+                    <ng-container *ngIf="selectedView$ | async as selectedView">
+                        {{selectedView[0].toUpperCase()+selectedView.slice(1,selectedView.length)}}
+                    </ng-container>                   
+                  
+                </button>
+                <mat-menu #menuView="matMenu">
+                    <ng-container *ngIf="selectedView$ | async as periodS">
+                        <button mat-menu-item [routerLink]="['schedule']" *ngIf="(selectedView$ | async)!='schedule'" (click)="onSelectView('schedule')">Schedule</button>
+                        <button mat-menu-item [routerLink]="['calendar']" *ngIf="(selectedView$ | async)!='calendar'" (click)="onSelectView('calendar')">Calendar</button>      
+                    </ng-container>                     
+                </mat-menu>
+            </div>
             <div class="nuv-options">
                 <button mat-stroked-button  [matMenuTriggerFor]="menu">
                     <ng-container *ngIf="period$ | async as periodSelected">
@@ -33,10 +48,14 @@
                   
                 </button>
                 <mat-menu #menu="matMenu">
-                <button mat-menu-item [routerLink]="['week']"  >Week</button>
-                <button mat-menu-item [routerLink]="['day']"  >Day</button>            
-                <button mat-menu-item [routerLink]="['month']"  >Month</button>
-                <button mat-menu-item [routerLink]="['year']" >Year</button>
+                    <ng-container *ngIf="selectedView$ | async as selectedView">               
+                        <button mat-menu-item routerLink="{{selectedView}}/week"  >Week</button>
+                        <button mat-menu-item routerLink="{{selectedView}}/day"  >Day</button>            
+                        <button mat-menu-item routerLink="{{selectedView}}/month"  >Month</button>
+                        <ng-container *ngIf="selectedView=='calendar'">
+                            <button mat-menu-item routerLink="{{selectedView}}/year" >Year</button>
+                        </ng-container>               
+                </ng-container>
                 </mat-menu>
             </div>
         </div>

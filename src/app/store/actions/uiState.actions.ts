@@ -13,3 +13,7 @@ export const currentViewPeriodAction=createAction(
     ActionTypes.CURRENT_PERIOD_DISPLAY,
     props<{displaed_period: string}>()
 )
+export const currentViewModeAction = createAction(
+    ActionTypes.CURRENT_MODE_DISPLAY,
+    props<{display_mode: string}>()
+)

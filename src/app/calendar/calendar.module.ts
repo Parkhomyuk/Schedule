@@ -7,6 +7,7 @@ import { DayComponent } from './day/day.component';
 import { MonthComponent } from './month/month.component';
 import { YearComponent } from './year/year.component';
 import { CalendarComponent } from './calendar/calendar.component';
+import { ColumnAbstractComponent } from './utils/extends/column-abstract/column-abstract.component';
  
  
  
@@ -19,7 +20,8 @@ import { CalendarComponent } from './calendar/calendar.component';
     DayComponent,
     MonthComponent,
     YearComponent,
-    CalendarComponent
+    CalendarComponent,
+    ColumnAbstractComponent
   ],
   imports: [
     CommonModule,

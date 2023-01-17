@@ -3,6 +3,7 @@ import { select, Store } from '@ngrx/store';
 import * as moment from 'moment';
 import { Observable } from 'rxjs';
 import { IEvent } from 'src/app/calendar/models/event.interface';
+import { ColumnAbstractComponent } from 'src/app/calendar/utils/extends/column-abstract/column-abstract.component';
 import { DaysOfMonth } from 'src/app/sidepanel/panel/navigator/models/dayOfMonth.interface';
 import { ICurrentDateSate } from 'src/app/store/models/currentDateState.interface';
 import { selectSelectedDate } from 'src/app/store/selectors/date.selector';
@@ -15,34 +16,34 @@ import { NewEventComponent } from '../../new-event/new-event.component';
   templateUrl: './grid-columns.component.html',
   styleUrls: ['./grid-columns.component.scss']
 })
-export class GridColumnsComponent extends UnsubComponent implements OnInit {
+export class GridColumnsComponent extends ColumnAbstractComponent implements OnInit {
   @Input() public weekColumns!: moment.Moment[];
   @ViewChildren('viewContainerRef', { read: ViewContainerRef })  VCR!: QueryList<ViewContainerRef>;
   @ViewChildren(MarkerDirective, { read: ViewContainerRef }) appMarker!: QueryList<ViewContainerRef>;
-  @HostListener('mousedown',['$event'])
-  mousedown(event:any){
-    console.log('children', event.target)
-    let arr=this.appMarker?.toArray();
-    console.log('arr.length', this.appMarker.length)
-    let childComponentRef=null;
-    for(let i=0;i<this.appMarker.length;i++){
-      if(arr[i].element.nativeElement===event.target){
-        console.log('this.viewContainerRef?.toArray()[3]', this.appMarker.toArray())
-        let componentFactory=this.factory.resolveComponentFactory(NewEventComponent)
-        childComponentRef = this.VCR.toArray()[i].createComponent<singleData>(componentFactory);
-        childComponentRef.instance.data='green'
-      }
+  // @HostListener('mousedown',['$event'])
+  // mousedown(event:any){
+  //   console.log('children', event.target)
+  //   let arr=this.appMarker?.toArray();
+  //   console.log('arr.length', this.appMarker.length)
+  //   let childComponentRef=null;
+  //   for(let i=0;i<this.appMarker.length;i++){
+  //     if(arr[i].element.nativeElement===event.target){
+  //       console.log('this.viewContainerRef?.toArray()[3]', this.appMarker.toArray())
+  //       let componentFactory=this.factory.resolveComponentFactory(NewEventComponent)
+  //       childComponentRef = this.VCR.toArray()[i].createComponent<singleData>(componentFactory);
+  //       childComponentRef.instance.data='green'
+  //     }
      
-    }
-   console.log('childComponentRef', childComponentRef)
+  //   }
+  //  console.log('childComponentRef', childComponentRef)
     
-  }
+  // }
   public eventForDisplay: Array<IEvent[]>=[];
   public eventList: IEvent[]=[{"startDate":'2022-12-24T14:00:00',"endDate":'2022-12-24T18:00:00',"title":"new event"},{"startDate":'2022-12-21T14:00:00',"endDate":'2022-12-21T18:00:00',"title":"new event"}, {"startDate":'2022-12-20 10:00:00',"endDate":'2022-12-20 15:00:00',"title":"new event"}]
   public dayToday: moment.Moment=moment();
   public currentPeriod$!: Observable<DaysOfMonth>;
-  constructor(private renderer: Renderer2, private el: ElementRef, private store_date: Store<ICurrentDateSate>, public factory: ComponentFactoryResolver) {
-    super();
+  constructor(public renderer: Renderer2, private el: ElementRef, private store_date: Store<ICurrentDateSate>, public factory: ComponentFactoryResolver) {
+    super(renderer, factory);
     this.currentPeriod$=this.store_date.pipe(select(selectSelectedDate))
    }
 

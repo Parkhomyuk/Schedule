@@ -1,8 +1,30 @@
 .new-order-wrapper{
     position: absolute;
-    width: 80%;
-    height: 400px;
+    width: 95%;
+    height: 40px;
     //background-color: rgb(102, 102, 138);
     color: white;
     border-radius: 4px;
+    position: relative;
+    .resize{
+        cursor:row-resize;
+        height: 5px;
+        background-color: blue;
+    }
+    .grabber{
+        content: '';
+        position: absolute;
+        bottom: 0;
+        margin-left: -15px;
+        cursor: s-resize;
+        height: 9px;
+        width: 100%;
+        border-top: 1px solid #f1f1f1;
+        overflow: hidden;
+        background-color: #eff0f1;
+        background-image: url('https://cdn.sstatic.net/Sites/stackoverflow/img/sprites.svg'),none;
+        background-position: 210px -364px;
+        background-size: initial;
+        background-repeat: no-repeat;
+    }
 }
