@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { MarkerDirective } from './directives/marker.directive';
 import { TooltipComponent } from './components/tooltip/tooltip.component';
 import { UnsubComponent } from './components/unsub/unsub.component';
+import { DndDirective } from './directives/dnd.directive';
 
 
 
@@ -10,11 +11,12 @@ import { UnsubComponent } from './components/unsub/unsub.component';
   declarations: [
     MarkerDirective,
     TooltipComponent,
-    UnsubComponent
+    UnsubComponent,
+    DndDirective
   ],
   imports: [
     CommonModule
   ],
-  exports:[MarkerDirective, TooltipComponent, UnsubComponent]
+  exports:[MarkerDirective, TooltipComponent, UnsubComponent, DndDirective]
 })
 export class UtilsModule { }

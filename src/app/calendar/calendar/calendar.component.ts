@@ -12,7 +12,7 @@ export class CalendarComponent implements OnInit {
   constructor(private store: Store<ICurrentDateSate>) { }
 
   ngOnInit(): void {
-    console.log('store', this.store)
+     
   }
 
 }

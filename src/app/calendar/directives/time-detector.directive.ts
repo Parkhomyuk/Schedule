@@ -6,7 +6,7 @@ import * as moment from 'moment';
 export class TimeDetectorDirective implements OnInit,AfterViewInit ,OnDestroy {
 
   constructor(private el: ElementRef, private renderer: Renderer2) { 
-    console.log('detec parent', this.el)
+     
   }
   
   interval: any=0;
@@ -19,11 +19,10 @@ export class TimeDetectorDirective implements OnInit,AfterViewInit ,OnDestroy {
      }, 60000)
   }
   detectTime(){
-    console.log('this.el.nativeElement.offsetParent', this.el.nativeElement.offsetParent)
-    console.log('this.el.nativeElement', this.el.nativeElement)
+    
     let minute=this.el.nativeElement.offsetParent.clientHeight/1440;
     const nowMinutes=moment().hour()*60+moment().minute();
-    console.log('pix per sec', nowMinutes)
+     
     this.renderer.setStyle(this.el.nativeElement,'top', nowMinutes*minute+'px');
   }
 

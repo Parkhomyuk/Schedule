@@ -43,7 +43,7 @@ export class GridColumnsComponent extends ColumnAbstractComponent implements OnI
   public dayToday: moment.Moment=moment();
   public currentPeriod$!: Observable<DaysOfMonth>;
   constructor(public renderer: Renderer2, private el: ElementRef, private store_date: Store<ICurrentDateSate>, public factory: ComponentFactoryResolver) {
-    super(renderer, factory);
+    super(renderer, factory, el.nativeElement);
     this.currentPeriod$=this.store_date.pipe(select(selectSelectedDate))
    }
 

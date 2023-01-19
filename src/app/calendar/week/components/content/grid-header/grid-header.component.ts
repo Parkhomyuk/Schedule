@@ -27,7 +27,7 @@ export class GridHeaderComponent extends UnsubComponent implements OnInit {
 
   ngOnInit(): void {
     this.timeZone=moment().format('Z');
-    console.log('timezone',moment().format('Z'))
+     
     this.renderer.setStyle(this.el.nativeElement.children[0], 'width',this.el.nativeElement.parentElement.offsetWidth+'px' );
     const sub1=this.selectedDateState$.subscribe(date=>{
       this.startWeek=moment(`${date.dayOfMonth}-${date.currentMonth+1}-${date.currentYear}`,'DD-MM-YYYY').startOf('week');
@@ -35,7 +35,7 @@ export class GridHeaderComponent extends UnsubComponent implements OnInit {
       for(let i=0;i<7;i++){
         this.weekDays.push(moment(this.startWeek).add(i,'days'))
       }
-      console.log(this.weekDays)
+      
     })
     this.subscriber.push(sub1)
   }

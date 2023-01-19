@@ -22,7 +22,7 @@ export class GridRowsComponent implements OnInit {
       
       
     }    
-    console.log('columnGrid',this.columnGrid)
+    
     for(let i=0;i<24;i++){
       if (this.timeFormat=='12'){
         this.rowsGrid.push(moment().startOf('day').add(i,'hours').format("hh A"))

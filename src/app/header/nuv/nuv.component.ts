@@ -63,7 +63,7 @@ export class NuvComponent extends UnsubComponent  implements OnInit, OnDestroy {
         const regex=new RegExp('\/([A-Za-z0-9_-]*)\/');
         const regexPrefix=new RegExp('\/[A-Za-z0-9_-]*$');
         
-        console.log('prefix', event.urlAfterRedirects.replace(regexPrefix,'').slice(1,)) 
+        
          
         if(event.url!='/'){
           //tuple=event.url[1].toUpperCase()+event.url.slice(2,);
@@ -149,7 +149,7 @@ export class NuvComponent extends UnsubComponent  implements OnInit, OnDestroy {
     if(this.period!=null){
     
       this.router.navigateByUrl('/'+view+'/'+this.period[0].toLowerCase()+this.period.slice(1,))
-      console.log('navigate', '/'+view+'/'+this.period[0].toLowerCase()+this.period.slice(1,) )
+       
     }    
     
   }
