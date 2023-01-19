@@ -1,24 +1,20 @@
-import { AfterViewInit, Directive, ElementRef, HostListener, OnInit, Renderer2, ViewChild, ViewContainerRef } from '@angular/core';
+ 
+import { AfterViewInit, ContentChild, Directive, ElementRef, HostListener, OnInit, Renderer2, ViewChild, ViewContainerRef } from '@angular/core';
+
 
 @Directive({
   selector: '[appMarker]'
 })
 export class MarkerDirective implements OnInit , AfterViewInit{
+  dropped: boolean=true;
   
- @HostListener('click',['$event'])
+ @HostListener('dragover',['$event'])
  onClick(event: any){
- console.log('click type', event.offsetY )
- console.log('click type el', this.el.nativeElement );
-
- const div=this.renderer.createElement('div');
- this.renderer.setStyle(div,'width', '80%')
- this.renderer.setStyle(div,'height', '400px')
- this.renderer.setStyle(div,'background-color', 'lightblue')
- this.renderer.setStyle(div,'position', 'absolute')
- this.renderer.setStyle(div,'border-radius', '4px');
- this.renderer.setStyle(div,'border', '0.5px solid white');
- this.renderer.setStyle(div,'top', event.offsetY+'px')
- //this.renderer.appendChild(this.el.nativeElement, div);
+    if(this.el.nativeElement.contains(event.target)){
+     
+      //this.renderer.appendChild(this.el.nativeElement, this.resize.el);
+    }
+ 
 //   console.log('click', event.target.children)
   
 //   this.renderer.setStyle(this.el.nativeElement.children[0],'display','block');
@@ -32,7 +28,11 @@ export class MarkerDirective implements OnInit , AfterViewInit{
   constructor(private vc: ViewContainerRef, private el: ElementRef, private renderer: Renderer2, public _viewContainerRef: ViewContainerRef) { 
     
   }
- 
+  @HostListener('mouseup',['$event'])
+  onMouseup(event: any){
+   // console.log('my position drop', this.el)
+   this.dropped=true;
+  }
   ngOnInit(): void {
     // this.el.nativeElement
     // console.log('xxccx',this.el.nativeElement);
@@ -41,7 +41,7 @@ export class MarkerDirective implements OnInit , AfterViewInit{
     // this.renderer.setStyle(this.el.nativeElement.children[0],'display','block')
   }
   ngAfterViewInit(): void {
-      
+    
   }
 
 }
