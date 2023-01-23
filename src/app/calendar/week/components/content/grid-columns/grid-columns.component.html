@@ -1,4 +1,4 @@
-<div class="week-wrapper" >
+<div class="week-wrapper" #gridWrapper>
     <div class="week-grid">
         <div class="column-left" (click)="onAdd()"></div> 
         <div class="column-center" *ngFor="let column of weekColumns; let i= index" appMarker  [ngClass]="{'column-active' : onDetectDate(column)}" id="{{i}}"> 
@@ -19,14 +19,14 @@
             
            
             
-            <div class="event-marker" #marker >
+            <!-- <div class="event-marker" #marker >
                  {{column.format('MMMM Do,dddd')}}
             </div>
             <div *ngFor="let event of eventForDisplay[i]">
                 <div>{{event.title}}</div>
                 <div>{{event.startDate}}</div>
                 <div>{{event.endDate}}</div>
-            </div>
+            </div> -->
 
         </div>
     </div>

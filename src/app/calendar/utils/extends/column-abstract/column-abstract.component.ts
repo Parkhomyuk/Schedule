@@ -37,18 +37,20 @@ export class ColumnAbstractComponent extends UnsubComponent implements OnInit {
     }
     @HostListener('dragover',['$event'])
     onMoseDragOver(event: MouseEvent){
-      console.log('my position', this.childComponentRef.location.nativeElement.parentElement);
+     // console.log('my position', this.childComponentRef.location.nativeElement.parentElement);
       // console.log('my position home appMarker', this.elementRef);
+      
       let arr=this.appMarker?.toArray();  
       if(this.childComponentRef!=null){
        
         for(let i=0;i<this.appMarker.length;i++){
           if(arr[i].element.nativeElement.contains(event.target)){
-            console.log('arr[i].element.nativeElement', arr[i].element.nativeElement)
-            console.log('this.childComponentRef.location.nativeElement', this.childComponentRef.location.nativeElement)
+          //  console.log('arr[i].element.nativeElement', event.target)
+            
                  this.renderer.appendChild(arr[i].element.nativeElement, this.childComponentRef.location.nativeElement)
                 //  this.renderer.removeChild(this.childComponentRef.location.nativeElement.parentElement, this.childComponentRef.location.nativeElement)
-           }
+           }  
+             
         }   
       }
     }

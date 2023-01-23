@@ -6,6 +6,7 @@ import { ContentChild, Directive, ElementRef, HostListener, Renderer2 } from '@a
 })
 export class ResizeDirective {
 @ContentChild('grabberEl') grabberEl: ElementRef= {} as ElementRef;
+ 
   height = 0;
   y = 0;
   oldY = 0;
@@ -20,9 +21,14 @@ export class ResizeDirective {
     if (!this.grabber) {
         return;
     }
-    else if(this.el.nativeElement.clientHeight>=10){
-      this.resizer(event.clientY - this.oldY);
+    else if(this.el.nativeElement.clientHeight>=10 ){
+      if ((this.el.nativeElement.clientHeight+this.el.nativeElement.offsetTop)<=this.el.nativeElement.offsetParent.parentElement.clientHeight){
+        
+        this.resizer(event.clientY - this.oldY);
       this.oldY = event.clientY;
+      }
+      
+      
     } else{
       this.renderer.setStyle(this.el.nativeElement, 'height', '10px')
     }
@@ -44,7 +50,7 @@ export class ResizeDirective {
     this.height += offsetY;
   }
 
-
+  @HostListener('touchend', ['$event'])
   @HostListener('document:mousedown', ['$event'])
   onMouseDown(event: MouseEvent) {    
    
@@ -56,18 +62,19 @@ export class ResizeDirective {
     }else if(this.el.nativeElement.contains(event.target)){
       this.dragger=true;
       this.renderer.setAttribute(this.el.nativeElement, 'draggable','true')
-     this.draggingStart=event.offsetY
+     //this.draggingStart=event.offsetY
     }
     
-    this.draggingStart=event.clientY
+    this.draggingStart=event.pageY
     
   }
+  @HostListener('touchmove', ['$event'])
   @HostListener('dragend',['$event'])
   onMouseDragEnd(item: MouseEvent){
-    item.preventDefault();
+   // item.preventDefault();
     this.grabber=false;     
    // console.log('item parent', item)
-    this.renderer.setStyle(this.el.nativeElement, 'top',Number(this.el.nativeElement.style.top.slice(0,-2))-(this.draggingStart- item.clientY)+'px');
+    this.renderer.setStyle(this.el.nativeElement, 'top',Number(this.el.nativeElement.style.top.slice(0,-2))-(this.draggingStart- item.pageY)+'px');
     if(this.dragger==true){
        
        
@@ -80,26 +87,21 @@ export class ResizeDirective {
     
     
   }
+
+  @HostListener('touchstart', ['$event'])
   @HostListener('document: dragstart', ['$event'])
   onMouseDrag(event: MouseEvent){
     this.draggingStart=event.clientY;
    // console.log('start event.offsetY', event.clientY)
   }  
 
-  // @HostListener('drop',['$event'])
-  // onMouseDragDrop(item: any){
-  //   item.preventDefault();
-  //   this.grabber=false;
+  @HostListener('dragenter',['$event'])
+  onMouseDragDrop(item: any){
+   
+    console.log('drag enter', item)
     
-    
-  //   if(!this.dragger){
-  //     this.renderer.setStyle(this.el.nativeElement, 'top',item.clientY+'px');
-      
-  //   }
-  //   this.dragger=false;
      
-     
-  // }
+  }
   @HostListener('dragover',['$event'])
   onMouseDragOver(item: MouseEvent){
     

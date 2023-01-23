@@ -39,7 +39,7 @@
             .current-time{
                 .current-time-pin{
                     position: absolute;
-                     
+                    z-index: 49; 
                     width: 5px;
                     height: 5px;
                     border-radius: 50%;

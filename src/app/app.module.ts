@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -18,6 +19,9 @@ import { environment } from '../environments/environment';
 import { uiReducer } from './store/reducers/uiState.reducer';
 import { ScheduleModule } from './schedule/schedule.module';
 
+import {HttpClientInMemoryWebApiModule, InMemoryDbService} from 'angular-in-memory-web-api'
+import { InMemoryDataService } from './app.db';
+
 @NgModule({
   declarations: [
     AppComponent
@@ -32,8 +36,9 @@ import { ScheduleModule } from './schedule/schedule.module';
     BrowserAnimationsModule,
     StoreModule.forRoot({spinnerReducer:spinnerReducer , dateReducer: dateReducer, uiReducer: uiReducer}),
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
-    StoreRouterConnectingModule.forRoot()
-  
+    StoreRouterConnectingModule.forRoot(),
+    HttpClientModule,
+  //  HttpClientInMemoryWebApiModule.forRoot(InMemoryDataService, { delay: 100 }),
   ],
   providers: [],
   bootstrap: [AppComponent]
